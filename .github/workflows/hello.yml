@@ -8,4 +8,6 @@ jobs:
 
     steps:
       - name: Print message
-        run: echo -e "Hello, Github Actions \nShivam Dhiman!"
+        run: 
+            echo  "Hello, Github Actions "
+            echo "Shivam Dope"
