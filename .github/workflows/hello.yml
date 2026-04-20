@@ -1,13 +1,18 @@
-name: My First Workflow
+name: CI Workflow
 
-on: push
+on:
+  push:
+  pull_request:
 
 jobs:
   say-hello:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Print message
-        run: 
-            echo  "Hello, Github Actions "
-            echo "Shivam Dope"
+      - name: Print Hello
+        run: echo "Hello from 1st job"
+
+  say-bye:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Print Bye
+        run: echo "bye from 2nd job"
