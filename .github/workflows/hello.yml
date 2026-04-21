@@ -34,6 +34,31 @@
 #       - name: List files
 #         run: ls
 
+# name: Uses action
+
+# on:
+#   push:
+#   pull_request:
+
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+
+#       - name: Setup Node.js 18
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: 18
+
+#       - name: Check Node version
+#         run: node -v
+
+#       - name: List files
+#         run: ls
+
 name: Uses action
 
 on:
@@ -55,6 +80,12 @@ jobs:
 
       - name: Check Node version
         run: node -v
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm run test
 
       - name: List files
         run: ls
