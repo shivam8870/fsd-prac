@@ -17,14 +17,16 @@ jobs:
         with:
           node-version: 18
 
-      - name: Check Node version
-        run: node -v
-
       - name: Install dependencies
         run: npm install
 
       - name: Run tests
         run: npm run test
 
-      - name: List files
-        run: ls
+  deploy:
+    needs: test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Deploy app
+        run: echo "deployed successfully"
