@@ -1,18 +1,30 @@
-name: CI Workflow
+name: Uses action
 
 on:
   push:
   pull_request:
 
 jobs:
-  say-hello:
+  test:
     runs-on: ubuntu-latest
-    steps:
-      - name: Print Hello
-        run: echo "Hello from 1st job"
 
-  say-bye:
-    runs-on: ubuntu-latest
     steps:
-      - name: Print Bye
-        run: echo "bye from 2nd job"
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 18
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+
+      - name: Check Node version
+        run: node -v
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run tests
+        run: npm run test
+
+      - name: List files
+        run: ls
