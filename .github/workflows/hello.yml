@@ -59,33 +59,62 @@
 #       - name: List files
 #         run: ls
 
-name: Uses action
+# name: Uses action
+
+# on:
+#   push:
+#   pull_request:
+
+# jobs:
+#   test:
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v4
+
+#       - name: Setup Node.js 18
+#         uses: actions/setup-node@v4
+#         with:
+#           node-version: 18
+
+#       - name: Check Node version
+#         run: node -v
+
+#       - name: Install dependencies
+#         run: npm install
+
+#       - name: Run tests
+#         run: npm run test
+
+#       - name: List files
+#         run: ls
+name: Action
 
 on:
   push:
-  pull_request:
 
 jobs:
-  test:
+  job1:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: create a file
+        run: echo "Hello world" > file.txt
 
-      - name: Setup Node.js 18
-        uses: actions/setup-node@v4
+      - name: upload an artifact
+        uses: actions/upload-artifact@v4
         with:
-          node-version: 18
+          name: my-file
+          path: file.txt
 
-      - name: Check Node version
-        run: node -v
+  job2:
+    needs: job1
+    runs-on: ubuntu-latest
+    steps:
+      - name: download a file
+        uses: actions/download-artifact@v4
+        with:
+          name: my-file
 
-      - name: Install dependencies
-        run: npm install
-
-      - name: Run tests
-        run: npm run test
-
-      - name: List files
-        run: ls
+      - name: read file
+        run: cat file.txt
